@@ -77,6 +77,35 @@ ON
     p1.x != p2.x OR p1.y != p2.y;
 
 
-4 Problem 4 : Combine Two Tables	(https://leetcode.com/problems/combine-two-tables/)
+## 4 Problem 4 : Combine Two Tables	(https://leetcode.com/problems/combine-two-tables/)
+<br>
+SELECT p.firstName, p.lastName, a.city, a.state
+FROM Person p Left Join Address a
+ON p.personId=a.personId
+<br>
 
-5 Problem 5 : Customers with Strictly Increasing Purchases		(https://leetcode.com/problems/customers-with-strictly-increasing-purchases/)
+## 5 Problem 5 : Customers with Strictly Increasing Purchases		(https://leetcode.com/problems/customers-with-strictly-increasing-purchases/)
+<br>
+select
+    customer_id
+from
+    (
+        select
+            customer_id,
+            year(order_date),
+            sum(price) as total,
+            year(order_date) - rank() over(
+                partition by customer_id
+                order by
+                    sum(price)
+            ) as rk
+        from
+            Orders
+        group by
+            customer_id,
+            year(order_date)
+    ) t
+group by
+    customer_id
+having
+    count(distinct rk) = 1; 
