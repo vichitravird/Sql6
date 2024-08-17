@@ -4,11 +4,13 @@
 
 ## 2 Problem 2 : Game Play Analysis III		(https://leetcode.com/problems/game-play-analysis-iii/)
 <br>
+### Solution 1 USing Window Function
 SELECT 	player_id, event_date,
 	sum(games_played) over(partition by player_id order by event_date) as games_played_so_far
 FROM Activity
 
 <br>
+### Solution 2 USing Self Join
 SELECT 	t1.player_id, t1.event_date,
 	sum(t2.games_played) as games_played_so_far
 FROM Activity t1, Activity t2
@@ -17,7 +19,7 @@ ON t1.player_id=t2.player_id and t1.event_date>=t2.event_date
 
 ## 3 Problem 3 : Shortest Distance in a Plane		(https://leetcode.com/problems/shortest-distance-in-a-plane/)
 <br>
-### Solution 1
+### Solution 1 Using Self Join with Limit
 <br>
 SELECT ROUND(SQRT(POW(p1.x - p2.x, 2) + POW(p1.y - p2.y, 2)), 2) AS shortest
 FROM
@@ -26,7 +28,8 @@ FROM
 ORDER BY 1
 LIMIT 1;
 <br>
-### Solution 2
+
+### Solution 2 Using Self Join with Min
 <br>
 SELECT 
     ROUND(MIN(SQRT(POW(p1.x - p2.x, 2) + POW(p1.y - p2.y, 2))), 2) AS shortest_distance
