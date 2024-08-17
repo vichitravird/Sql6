@@ -2,7 +2,18 @@
 
 1 Problem 1 : Game Play Analysis II	(https://leetcode.com/problems/game-play-analysis-ii/)
 
-2 Problem 2 : Game Play Analysis III		(https://leetcode.com/problems/game-play-analysis-iii/)
+## 2 Problem 2 : Game Play Analysis III		(https://leetcode.com/problems/game-play-analysis-iii/)
+<br>
+SELECT 	player_id, event_date,
+	sum(games_played) over(partition by player_id order by event_date) as games_played_so_far
+FROM Activity
+
+<br>
+SELECT 	t1.player_id, t1.event_date,
+	sum(t2.games_played) as games_played_so_far
+FROM Activity t1, Activity t2
+ON t1.player_id=t2.player_id and t1.event_date>=t2.event_date
+<br>
 
 ## 3 Problem 3 : Shortest Distance in a Plane		(https://leetcode.com/problems/shortest-distance-in-a-plane/)
 <br>
