@@ -7,6 +7,7 @@
 ## 3 Problem 3 : Shortest Distance in a Plane		(https://leetcode.com/problems/shortest-distance-in-a-plane/)
 <br>
 ### Solution 1
+<br>
 SELECT ROUND(SQRT(POW(p1.x - p2.x, 2) + POW(p1.y - p2.y, 2)), 2) AS shortest
 FROM
     Point2D AS p1
@@ -15,6 +16,7 @@ ORDER BY 1
 LIMIT 1;
 <br>
 ### Solution 2
+<br>
 SELECT 
     ROUND(MIN(SQRT(POW(p1.x - p2.x, 2) + POW(p1.y - p2.y, 2))), 2) AS shortest_distance
 FROM 
